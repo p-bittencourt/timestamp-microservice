@@ -6,14 +6,30 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": " npm run clean && tsc && npm run copy-assets",
+    "install-deps": "npm install",
+    "build": "npm run clean && tsc && npm run copy-assets",
     "clean": "rimraf dist",
-    "copy-assets": "copyfiles -u 1 \"src/views/**/*\" \"src/public/**/*\" dist"
+    "copy-assets": "copyfiles -u 1 \"src/views/**/*\" \"src/public/**/*\" dist",
+    "postinstall": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.7.3",
+    "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.7",
+    "copyfiles": "^2.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
   },
   "author": "Pedro Bittencourt",
   "keywords": [
@@ -21,15 +37,5 @@
     "express",
     "freeCodeCamp"
   ],
-  "license": "MIT",
-  "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/ejs": "^3.1.5",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.10.7",
-    "copyfiles": "^2.4.1",
-    "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
-  }
+  "license": "MIT"
 }
