@@ -8,6 +8,8 @@ export const createRoutes = (app: Application) => {
   app.get('/api', function (req: Request, res: Response) {
     const formattedUtc = new Date().toUTCString();
     const unixDate = Date.now().toString();
+    console.log('formattedUtc: ', typeof formattedUtc);
+    console.log('unixDate: ', typeof unixDate);
     res.json({ unix: unixDate, utc: formattedUtc });
   });
 
