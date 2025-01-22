@@ -2,13 +2,18 @@
   "name": "timestamp-microservice",
   "version": "0.0.1",
   "description": "An FCC Backend Challenge",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": " npm run clean && tsc && npm run copy-assets",
+    "clean": "rimraf dist",
+    "copy-assets": "copyfiles -u 1 \"src/views/**/*\" \"src/public/**/*\" dist"
   },
   "dependencies": {
-    "express": "^4.12.4",
-    "cors": "^2.8.0"
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
   },
   "author": "Pedro Bittencourt",
   "keywords": [
@@ -16,5 +21,15 @@
     "express",
     "freeCodeCamp"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.7",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
 }
