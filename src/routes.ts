@@ -8,18 +8,18 @@ export const createRoutes = (app: Application) => {
   app.get('/api', function (req: Request, res: Response) {
     const formattedUtc = new Date().toUTCString();
     const unixDate = Date.now().toString();
-    res.json({ unix: unixDate, utc: formattedUtc });
+    res.json({ unix: parseInt(unixDate), utc: formattedUtc });
   });
 
   app.get('/api/:date?', function (req: Request, res: Response) {
     if (typeof req.params.date !== 'string') {
-      res.json({ error: 'Invalid date format' });
+      res.json({ error: 'Invalid Date' });
       return;
     }
 
     const validInput = checkValidInput(req.params.date);
     if (!validInput.valid) {
-      res.json({ error: 'Invalid date format' });
+      res.json({ error: 'Invalid Date' });
       return;
     }
 
@@ -49,17 +49,17 @@ function checkValidInput(input: string): { valid: boolean; type?: string } {
 function formatOutput(
   input: string,
   type?: string
-): { unix: string; utc: string } {
+): { unix: number; utc: string } {
   if (type === 'unix') {
     const parsed = parseInt(input);
     const utcDate = new Date(parsed);
-    return { unix: input, utc: utcDate.toUTCString() };
+    return { unix: parsed, utc: utcDate.toUTCString() };
   } else {
     const date = new Date(input);
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDate() + 1;
     const unixDate = Date.UTC(year, month, day).toString();
-    return { unix: unixDate, utc: date.toUTCString() };
+    return { unix: parseInt(unixDate), utc: date.toUTCString() };
   }
 }
